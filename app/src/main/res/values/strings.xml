@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">Q4U</string>
-    <string name="editText_intent">Enter your message</string>
+    <string name="editText_message">메시지를 입력하세요</string>
     <string name="editText_reply">Enter your reply</string>
-    <string name="button_label_toast">Toast</string>
-    <string name="button_label_intent">Intent</string>
+    <string name="send">전송</string>
     <string name="button_label_count">Count</string>
-    <string name="button_label_login">Login</string>
+    <string name="button_label_login">로그인</string>
     <string name="button_label_reply">Reply</string>
 
     <string name="toast_message">Hello, Toast!</string>
@@ -14,7 +13,7 @@
     <string name="text_message">No Message Received</string>
     <string name="text_reply">No Reply Received</string>
 
-    <string name="text_username">Username</string>
+    <string name="text_username">이름</string>
     <string name="text_password">Password</string>
     <string name="text_attempt">Attempt</string>
 </resources>
