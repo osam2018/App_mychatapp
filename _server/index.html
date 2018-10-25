@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 14px; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      p { padding: 5px 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p id="users"></p>
+    </div>
+    <div>
+      <p id="typers"></p>
+    </div>
+    <ul id="messages"></ul>
+    <form id="join" action="">
+      <input id="name" autocomplete="off" /><button>참가</button>
+    </form>
+    <form id="chat" action="">
+      <input id="msg" autocomplete="off" /><button>전송</button>
+    </form>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function() {
+        var socket = io();
+        var hasJoined = false;
+        
+        const NO_SPACES_IN_NAME_MESSAGE = '이름은 공백을 포함할 수 없어요.'
+        
+        $('#chat').hide();
+        $('#name').focus();
+        
+        $('#join').submit(function() {
+          var name = $('#name').val();
+          if (name != '') {
+            if (name.match(' ') != null) {
+              $('#messages').append($('<li>').text(NO_SPACES_IN_NAME_MESSAGE));
+              $('#name').val('');
+            } else {
+              socket.emit('join', name);
+              $('#join').detach();
+              $('#chat').show();
+              $('#msg').focus();
+              hasJoined = true;
+            }
+          }
+          return false;
+        });
+        
+        $('#chat').submit(function() {
+          if (hasJoined) {
+            var msg = $('#msg').val();
+            var msgArr = msg.split(' ');
+            var cmd = msgArr[0];
+            if (msg.length > 0) {
+              socket.emit('chat message', msg);
+            }
+            $('#msg').val('');
+          } else {
+            $('#chat').hide();
+            $('#join').show();
+            $('#name').focus();
+          }
+          return false;
+        });
+        
+        socket.on('chat message', function(data) {
+          var name = data["name"];
+          var msg = data["message"];
+          var color = data["color"];
+          $('#messages').append($('<li>').append($('<span>').text(name).css('color', color).css('font-weight', 'bold')).append($('<span>').text(': ')).append($('<span>').text(msg)));
+        });
+        
+        socket.on('update users', function(msg) {
+          $('#users').text(msg);
+        });
+        
+        socket.on('update typers', function(msg) {
+          $('#typers').text(msg);
+        });
+        
+        const TYPING_TIMEOUT = 1000;  // 밀리초
+        var typingTimeout;
+        $('#msg').on('keyup', function() {
+          socket.emit('typing', true);
+          if (typingTimeout != undefined) clearTimeout(typingTimeout);
+          typingTimeout = setTimeout(stopTyping, TYPING_TIMEOUT);
+        });
+        function stopTyping() {
+            socket.emit('typing', false);
+        }
+        
+      });
+    </script>
+  </body>
+</html>
