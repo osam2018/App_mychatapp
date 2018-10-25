@@ -4,14 +4,13 @@ Socket.io를 활용한 모바일 & 웹 채팅 애플리케이션.
 
 ### 서버 (`_server/`)
 
-* 포트 3000
-
 ```
 $ cd _server
 $ npm start
 ```
 
 * 앱 또는 브라우저를 이용해 접속
+* 앱 접속 전 `ChatApplication.java` 파일 IO.socket URL을 호스트 주소(포트 3000)로 변경
 
 ## 알려진 버그
 
