@@ -1,19 +1,20 @@
 <resources>
     <string name="app_name">Q4U</string>
-    <string name="editText_message">메시지를 입력하세요</string>
-    <string name="editText_reply">Enter your reply</string>
-    <string name="send">전송</string>
-    <string name="button_label_count">Count</string>
-    <string name="button_label_login">로그인</string>
-    <string name="button_label_reply">Reply</string>
 
-    <string name="toast_message">Hello, Toast!</string>
+    <string name="chat">채팅</string>
+    <string name="join">참가</string>
+    <string name="login">로그인</string>
+    <string name="memo">메모</string>
+    <string name="save">저장</string>
+    <string name="send">전송</string>
     <string name="zero">0</string>
 
-    <string name="text_message">No Message Received</string>
-    <string name="text_reply">No Reply Received</string>
+    <string name="please_input_name">이름을 입력하세요</string>
+    <string name="saved_memo">메모를 저장했습니다</string>
 
+    <string name="editText_memo">메모를 입력하세요</string>
+    <string name="editText_message">메시지를 입력하세요</string>
     <string name="text_username">이름</string>
-    <string name="text_password">Password</string>
-    <string name="text_attempt">Attempt</string>
+    <string name="text_password">비밀번호</string>
+    <string name="text_attempt">시도</string>
 </resources>

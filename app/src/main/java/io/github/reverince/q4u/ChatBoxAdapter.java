@@ -43,6 +43,7 @@ public class ChatBoxAdapter extends RecyclerView.Adapter<ChatBoxAdapter.MyViewHo
         //binding the data from our ArrayList of object to the item.xml using the viewholder
         Message m = messageList.get(position);
         holder.name.setText(m.getName());
+        holder.name.setTextColor(m.getColor());
         holder.message.setText(m.getMessage());
     }
 }

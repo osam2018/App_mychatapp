@@ -1,13 +1,16 @@
 package io.github.reverince.q4u;
 
+import android.graphics.Color;
+
 public class Message {
     private String name;
     private String message;
+    private int color;
 
-    public Message() {}
-    public Message(String name, String message) {
+    public Message(String name, String message, String color) {
         this.name = name;
         this.message = message;
+        this.color = Color.parseColor(color);
     }
 
     public String getName() {
@@ -23,4 +26,8 @@ public class Message {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public int getColor() { return color; }
+
+    public void setColor(String color) { this.color = Color.parseColor(color); }
 }
